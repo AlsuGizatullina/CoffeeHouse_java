@@ -1,0 +1,4 @@
+id,name,description,price,discount_price,discount,image
+1,Product1,Description1,100.00,90.00,true,image1.jpg
+2,Product2,Description2,200.00,180.00,false,image2.jpg
+3,Product3,Description3,300.00,270.00,true,image3.jpg
