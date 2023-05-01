@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.alsu.coffeehouse.domain.dto.UserRegisterDTO;
 import ru.alsu.coffeehouse.domain.model.User;
+import ru.alsu.coffeehouse.mapper.UserMapper;
 import ru.alsu.coffeehouse.repository.UserRepository;
 
 import java.util.Optional;
@@ -12,7 +13,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
-//    private final UserMapper userMapper;
+    private final UserMapper userMapper;
 
     /**
      * Сохранение пользователя
@@ -22,12 +23,12 @@ public class UserService {
     }
 
     /**
-     * Поиск пользователя по email
-     * @param email
+     * Поиск пользователя по name
+     * @param username
      * @return
      */
-    public Optional<User> findByEmail(String email) {
-        return userRepository.findByEmail(email);
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
     /**
@@ -42,7 +43,7 @@ public class UserService {
      * Регистрация пользователя
      * @param userRegisterDTO
      */
-//    public void register(UserRegisterDTO userRegisterDTO) {
-//        save(userMapper.registerDTOToUser(userRegisterDTO));
-//    }
+    public void register(UserRegisterDTO userRegisterDTO) {
+        save(userMapper.registerDTOToUser(userRegisterDTO));
+    }
 }

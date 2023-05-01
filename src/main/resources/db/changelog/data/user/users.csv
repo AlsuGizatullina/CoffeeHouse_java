@@ -1,4 +1,4 @@
-id,name,password,email,balance,role
-1,John Doe,john123,john.doe@example.com,1000,user
-2,Jane Doe,jane123,jane.doe@example.com,2000,admin
-3,Bob Smith,bob123,bob.smith@example.com,500,user
+username,password,role
+John Doe,john123,user
+Jane Doe,jane123,admin
+Bob Smith,bob123,user

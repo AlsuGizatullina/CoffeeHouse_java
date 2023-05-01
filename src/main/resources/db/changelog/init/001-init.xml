@@ -21,20 +21,16 @@
             <column name="image" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-
+<!--TODO: Поменять автора-->
     <changeSet author="author" id="create_table_users">
         <createTable tableName="users">
             <column autoIncrement="true" name="id" type="BIGINT">
                 <constraints  nullable="false"/>
             </column>
-            <column name="name" type="varchar(255)"/>
+            <column name="username" type="varchar(255)"/>
             <column name="password" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="email" type="varchar(255)">
-                <constraints nullable="false" unique="true"/>
-            </column>
-            <column name="balance" type="double"/>
             <column name="role" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
