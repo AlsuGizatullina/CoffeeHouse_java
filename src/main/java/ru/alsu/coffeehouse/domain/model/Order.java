@@ -6,10 +6,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "users")
+@Table(name = "orders")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -23,7 +25,7 @@ public class Order {
     /**
      * Покупатель
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -32,11 +34,12 @@ public class Order {
      */
     @ManyToMany
     @JoinTable(
-            name = "users_products",
-            joinColumns = @JoinColumn(name = "user_id"),
+            name = "orders_products",
+            joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
+
 
     /**
      * Статус заказа
@@ -54,5 +57,7 @@ public class Order {
      * Дата заказа
      */
     @Column(name = "date")
-    private String date;
+    private LocalDateTime date;
+
+
 }

@@ -1,4 +1,7 @@
-name,description,price,discount_price,discount,image
-Product1,Description1,100.00,90.00,true,image1.jpg
-Product2,Description2,200.00,180.00,false,image2.jpg
-Product3,Description3,300.00,270.00,true,image3.jpg
+name,description,price,image
+Американо,Классический ароматный американо,250.00,https://www.pngall.com/wp-content/uploads/3/Cappuccino-PNG-Image-HD.png
+Капуччино,Нежный капучино с воздушной пенкой,200.00,https://www.publicdomainpictures.net/pictures/500000/nahled/kop-koffie-tas-koffie-png.png
+Кокосовый раф,Легкий раф с ароматом кокоса,300.00,https://www.publicdomainpictures.net/pictures/490000/velka/koffie-kopje-koffie-png.png
+Флэт Уайт,Классический флэт уайт с молоком,250.00,https://www.pngall.com/wp-content/uploads/3/Espresso-PNG-Picture.png
+Мокка,Кофе с добавлением горячего шоколада,350.00,https://www.pngall.com/wp-content/uploads/3/Espresso-PNG-File.png
+Латте,Ароматный кофе с молоком,250.00,https://www.pngall.com/wp-content/uploads/3/Espresso-PNG-Image-HD.png

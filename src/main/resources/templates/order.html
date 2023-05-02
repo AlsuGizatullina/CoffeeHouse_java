@@ -11,60 +11,35 @@
 
 <div layout:fragment="content">
     <h2 class="text-light text-center mt-4">Ваш заказ успешно добавлен!</h2>
-    <div class="container mt-4 text-light bg-black p-5 rounded-5 mb-5">
-        <h1 class="mb-4">Заказ</h1>
+    <div class="container mt-5 text-light bg-black p-5 rounded-5 mb-5">
+        <h1 class="mb-4" th:text="'Заказ #' + ${order.getId()}"></h1><small class="text-muted" th:text="' ' + ${order.getStatus()}"></small>
         <div class="row mb-5">
-            <form class="col-md-12" method="post">
+            <div class="col-md-12">
                 <div class="site-blocks-table">
                     <table class="table table-bordered text-light">
                         <thead>
                         <tr>
                             <th class="product-thumbnail">Изображение</th>
-                            <th class="product-name">Продукт</th>
+                            <th class="product-name">Название</th>
                             <th class="product-price">Цена</th>
-                            <th class="product-quantity">Количество</th>
-                            <th class="product-total">Сумма</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="text-light">
+                        <tr th:each="product: ${order.getProducts()}" class="text-light">
                             <td class="product-thumbnail">
-                                <img src="https://www.publicdomainpictures.net/pictures/500000/nahled/kop-koffie-tas-koffie-png.png" alt="Image" class="img-fluid" style="width: 150px; height: 150px">
+                                <img th:src="${product.getImage()}" alt="Image" class="img-fluid" style="width: 150px; height: 150px">
                             </td>
                             <td class="product-name">
-                                <h2 class="h5">Top Up T-Shirt</h2>
+                                <h2 th:text="${product.getName()}" class="h5"></h2>
                             </td>
-                            <td>$49.00</td>
-                            <td>
-                                <div class="input-group mb-3" style="max-width: 120px;">
-                                    <input type="text" class="form-control text-center bg-black text-light" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" >
-                                </div>
-
-                            </td>
-                            <td>$49.00</td>
-                        </tr>
-
-                        <tr>
-                            <td class="product-thumbnail">
-                                <img src="https://www.publicdomainpictures.net/pictures/490000/velka/koffie-kopje-koffie-png.png" alt="Image" class="img-fluid" style="width: 150px; height: 150px">
-                            </td>
-                            <td class="product-name">
-                                <h2 class="h5">Polo Shirt</h2>
-                            </td>
-                            <td>$49.00</td>
-                            <td>
-                                <div class="input-group mb-3" style="max-width: 120px;">
-                                    <input type="text" class="form-control text-center bg-black text-light" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                                </div>
-
-                            </td>
-                            <td>$49.00</td>
+                            <td th:text="${product.getPrice()} + ' руб.'"></td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
-            </form>
+            </div>
         </div>
+        <h3 class="text-light" th:text="'Общая сумма: ' + ${order.getTotal()} + ' руб.'"></h3>
     </div>
 </div>
 

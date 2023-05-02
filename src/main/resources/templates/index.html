@@ -36,37 +36,31 @@
     <div>
         <div class="container vh-100">
             <div class="h-100 d-flex align-items-center justify-content-center flex-column">
-                <h1 class="text-center text-light mb-4 display-1" style="font-family: 'Castoro Titling', cursive;">COFFEE HOUSE</h1>
-                <h6 class="text-center text-light text-opacity-75" style="font-family: 'Jost', sans-serif; font-size: 30px">Кофе - это стиль жизни, а мы здесь, чтобы сделать его еще лучше!</h6>
+                <h1 class="text-center text-light mb-4 display-1" style="font-family: 'Castoro Titling', cursive;">
+                    COFFEE HOUSE</h1>
+                <h6 class="text-center text-light text-opacity-75"
+                    style="font-family: 'Jost', sans-serif; font-size: 30px">Кофе - это стиль жизни, а мы здесь, чтобы
+                    сделать его еще лучше!</h6>
             </div>
         </div>
     </div>
     <div class="container mb-5">
-        <div class="card-group gap-4">
-            <div class="card bg-black border text-light rounded-5">
-                <img src="https://as2.ftcdn.net/v2/jpg/05/22/44/81/1000_F_522448178_nEpv23hUishRq44IiPLhghNZy6hIyegO.webp" class="card-img-top mx-auto" alt="..." style="width: 300px; height: 300px;">
-                <div class="card-body p-4">
-                    <h5 class="card-title">Название карточки</h5>
-                    <p class="card-text text-light text-opacity-50">Краткое описание карточки.</p>
-                    <button class="btn btn-outline-light price-btn" data-text="Добавить в корзину">200 руб.</button>
-                </div>
-            </div>
-
-            <div class="card bg-black border text-light rounded-5">
-                <img src="https://www.publicdomainpictures.net/pictures/500000/nahled/kop-koffie-tas-koffie-png.png" class="card-img-top mx-auto" alt="..." style="width: 300px; height: 300px;">
-                <div class="card-body p-4">
-                    <h5 class="card-title">Название карточки</h5>
-                    <p class="card-text text-light text-opacity-50">Краткое описание карточки.</p>
-                    <button class="btn btn-outline-light price-btn" data-text="Добавить в корзину">200 руб.</button>
-                </div>
-            </div>
-
-            <div class="card bg-black border text-light rounded-5">
-                <img src="https://www.publicdomainpictures.net/pictures/490000/velka/koffie-kopje-koffie-png.png" class="card-img-top mx-auto" alt="..." style="width: 300px; height: 300px;">
-                <div class="card-body p-4">
-                    <h5 class="card-title">Название карточки</h5>
-                    <p class="card-text text-light text-opacity-50">Краткое описание карточки.</p>
-                    <button class="btn btn-outline-light price-btn" data-text="Добавить в корзину">200 руб.</button>
+        <div class=" row" >
+            <div class="col-sm-4"  th:each="product: ${products}">
+                <div class="card bg-black border text-light rounded-5 mb-3">
+                    <img th:src="${product.getImage()}"
+                         class="card-img-top mx-auto" alt="..." style="width: 300px; height: 300px;">
+                    <div class="card-body p-4">
+                        <h5 th:text="${product.getName()}" class="card-title">Название карточки</h5>
+                        <p th:text="${product.getDescription()}" class="card-text text-light text-opacity-50">Краткое
+                            описание карточки.</p>
+                        <form th:method="POST" th:action="@{/cart/add-product/{id}(id=${product.getId()})}">
+                            <button type="submit" th:text="${product.getPrice()+' руб.'}"
+                                    class="btn btn-outline-light price-btn"
+                                    data-text="Добавить в корзину">
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

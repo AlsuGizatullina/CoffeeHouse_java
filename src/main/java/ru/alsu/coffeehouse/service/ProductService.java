@@ -1,5 +1,6 @@
 package ru.alsu.coffeehouse.service;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.alsu.coffeehouse.domain.model.Product;
@@ -10,8 +11,10 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
+@Transactional
 public class ProductService {
     private final ProductRepository productRepository;
+    private final AuthService authService;
 
     /**
      * Получение всех продуктов
@@ -36,4 +39,5 @@ public class ProductService {
     public Product getById(int id) {
         return findById(id).orElseThrow();
     }
+
 }

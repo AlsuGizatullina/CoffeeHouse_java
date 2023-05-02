@@ -15,12 +15,9 @@
                 separator=","
                 tableName="products"
                 usePreparedStatements="true">
-<!--            <column name="id" type="numeric"/>-->
             <column name="name" type="string"/>
             <column name="description" type="string"/>
             <column name="price" type="numeric"/>
-            <column name="discount_price" type="numeric"/>
-            <column name="discount" type="boolean"/>
             <column name="image" type="string"/>
         </loadData>
     </changeSet>

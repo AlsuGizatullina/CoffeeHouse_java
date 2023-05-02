@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "products")
 @NoArgsConstructor
@@ -27,22 +30,22 @@ public class Product {
     @Column(name = "price")
     private double price;
 
-    /*
-     * Цена товара по скидке
-     */
-    @Column(name = "discount_price")
-    private double discountPrice;
-
-    /*
-     * Есть ли скидка на товар
-     */
-    @Column(name = "discount")
-    private boolean discount;
-
-    /*
-     * Картинка товара
-     */
     @Column(name = "image")
     private String image;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_products",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id")
+    )
+    private List<User> users = new ArrayList<>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "orders_products",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "order_id")
+    )
+    private List<Order> orders = new ArrayList<>();
 }

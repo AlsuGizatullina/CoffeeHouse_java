@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,4 +30,14 @@ public class User {
     @Column(name = "role", nullable = false)
     private String role;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_products",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private List<Product> products = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, orphanRemoval = true)
+    private List<Order> orders = new ArrayList<>();
 }

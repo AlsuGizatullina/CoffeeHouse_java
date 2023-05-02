@@ -1,5 +1,6 @@
 package ru.alsu.coffeehouse.service;
 
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,6 +11,7 @@ import ru.alsu.coffeehouse.security.SecurityUser;
 
 @Service
 @AllArgsConstructor
+@Transactional
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;

@@ -1,4 +1,3 @@
 username,password,role
-John Doe,john123,user
-Jane Doe,jane123,admin
-Bob Smith,bob123,user
+s@s.s,$2a$10$aAbCg1baXzoufiKpspmaJulrPeM4l1PE4GDVnsg5n6Y0zH/Xf9Dwm,ROLE_ADMIN
+u@u.u,$2a$10$s9F7bPTLcZQvnITcyhAR9uSZyufXos.COXq0jpkJu1NSAkIT/LTnu,ROLE_USER
