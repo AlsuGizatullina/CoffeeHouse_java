@@ -13,7 +13,6 @@ import ru.alsu.coffeehouse.service.UserService;
 
 @Controller
 @AllArgsConstructor
-@Transactional
 public class AuthController {
     private final UserService userService;
 

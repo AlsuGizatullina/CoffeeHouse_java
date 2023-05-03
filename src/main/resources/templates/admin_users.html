@@ -21,28 +21,16 @@
                         <tr>
                             <th>Id</th>
                             <th>Имя</th>
-                            <th>Редактирование</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="text-light">
+                        <tr th:each="user: ${users}" class="text-light">
                             <td>
-                                <h2 class="h5">1</h2>
+                                <h2 th:text="${user.getId()}" class="h5"></h2>
                             </td>
                             <td>
-                                <h2 class="h5">Tom</h2>
+                                <h2 th:text="${user.getUsername()}" class="h5"></h2>
                             </td>
-                            <td><a href="#" class="btn btn-secondary">Редактировать</a></td>
-                        </tr>
-
-                        <tr class="text-light">
-                            <td>
-                                <h2 class="h5">2</h2>
-                            </td>
-                            <td>
-                                <h2 class="h5">Mike</h2>
-                            </td>
-                            <td><a href="#" class="btn btn-secondary">Редактировать</a></td>
                         </tr>
                         </tbody>
                     </table>

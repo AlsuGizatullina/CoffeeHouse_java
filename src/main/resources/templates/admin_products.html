@@ -24,34 +24,19 @@
                             <th class="product-name">Название</th>
                             <th class="product-price">Цена</th>
                             <th>Редактирование</th>
-                            <th class="product-remove">Удаление</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="text-light">
-                            <th>1</th>
+                        <tr th:each="product: ${products}" class="text-light">
+                            <td th:text="${product.getId()}"></td>
                             <td class="product-thumbnail">
-                                <img src="https://www.publicdomainpictures.net/pictures/500000/nahled/kop-koffie-tas-koffie-png.png" alt="Image" class="img-fluid" style="width: 150px; height: 150px">
+                                <img th:src="${product.getImage()}" alt="Image" class="img-fluid" style="width: 150px; height: 150px">
                             </td>
                             <td class="product-name">
-                                <h2 class="h5">Top Up T-Shirt</h2>
+                                <h2 th:text="${product.getName()}" class="h5"></h2>
                             </td>
-                            <td>$49.00</td>
-                            <td><a href="#" class="btn btn-secondary ">Редактировать</a></td>
-                            <td><a href="#" class="btn btn-danger btn-lg">X</a></td>
-                        </tr>
-
-                        <tr>
-                            <th>2</th>
-                            <td class="product-thumbnail">
-                                <img src="https://www.publicdomainpictures.net/pictures/490000/velka/koffie-kopje-koffie-png.png" alt="Image" class="img-fluid" style="width: 150px; height: 150px">
-                            </td>
-                            <td class="product-name">
-                                <h2 class="h5">Polo Shirt</h2>
-                            </td>
-                            <td>$49.00</td>
-                            <td><a href="#" class="btn btn-secondary ">Редактировать</a></td>
-                            <td><a href="#" class="btn btn-danger btn-lg">X</a></td>
+                            <td th:text="${product.getPrice()}"></td>
+                            <td><a th:href="@{/admin/products/{id}/edit(id=${product.getId()})}" class="btn btn-secondary ">Редактировать</a></td>
                         </tr>
                         </tbody>
                     </table>

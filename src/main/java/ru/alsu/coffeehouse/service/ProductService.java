@@ -4,6 +4,7 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.alsu.coffeehouse.domain.model.Product;
+import ru.alsu.coffeehouse.domain.model.User;
 import ru.alsu.coffeehouse.repository.ProductRepository;
 
 import java.util.List;
@@ -11,10 +12,10 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-@Transactional
+
 public class ProductService {
     private final ProductRepository productRepository;
-    private final AuthService authService;
+
 
     /**
      * Получение всех продуктов
@@ -40,4 +41,21 @@ public class ProductService {
         return findById(id).orElseThrow();
     }
 
+    public List<Product> getAll() {
+        return productRepository.findAll();
+    }
+
+    public void deleteById(int id) {
+        productRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void save(Product product) {
+        productRepository.save(product);
+    }
+
+    @Transactional
+    public void deleteFromCartById(User user, int id) {
+
+    }
 }

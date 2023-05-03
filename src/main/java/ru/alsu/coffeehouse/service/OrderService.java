@@ -11,11 +11,10 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-@Transactional
+
 public class OrderService {
     private final OrderRepository orderRepository;
 
-    @Transactional(readOnly = true)
     public Optional<Order> findById(Integer id) {
         return orderRepository.findById(id);
     }
@@ -32,12 +31,10 @@ public class OrderService {
         orderRepository.deleteById(id);
     }
 
-    @Transactional(readOnly = true)
     public Order getById(Integer id) {
         return findById(id).orElse(null);
     }
 
-    @Transactional(readOnly = true)
     public List<Order> getAll() {
         return orderRepository.findAll();
     }

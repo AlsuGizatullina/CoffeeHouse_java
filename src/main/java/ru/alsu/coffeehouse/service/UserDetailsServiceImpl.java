@@ -11,7 +11,6 @@ import ru.alsu.coffeehouse.security.SecurityUser;
 
 @Service
 @AllArgsConstructor
-@Transactional
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserRepository userRepository;

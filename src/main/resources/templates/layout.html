@@ -49,22 +49,34 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end mx-4" id="navbarNav">
         <ul class="navbar-nav d-flex gap-3">
+
+            <li th:if="${authUser}" class="nav-item">
+                <a th:if="${authUser.getRole() == 'ROLE_ADMIN'}" class="nav-link" href="/admin/products">Админ панель</a>
+            </li>
+
             <li class="nav-item active">
                 <a class="nav-link" href="/">Главная</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/cart">Корзина</a>
             </li>
-            <li class="nav-item">
+            <li th:unless="${authUser}" class="nav-item">
                 <a class="nav-link" href="/register">Регистрация</a>
             </li>
-            <li class="nav-item">
+            <li th:unless="${authUser}" class="nav-item">
                 <a class="nav-link" href="/login">Войти</a>
+            </li>
+            <li th:if="${authUser}" class="nav-item">
+                <span class="nav-link" th:text="${authUser.getUsername()}"></span>
+            </li>
+            <li th:if="${authUser}" class="nav-item">
+                <form th:action="@{/logout}" method="post">
+                    <button class="btn btn-outline-light" type="submit">Выйти</button>
+                </form>
             </li>
         </ul>
     </div>
 </nav>
-
 
 
 <div layout:fragment="content"></div>

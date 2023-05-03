@@ -8,26 +8,31 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import ru.alsu.coffeehouse.service.AuthService;
 import ru.alsu.coffeehouse.service.ProductService;
 import ru.alsu.coffeehouse.service.UserService;
 
 @Controller
 @AllArgsConstructor
-@Transactional
 public class CartController {
     private final ProductService productService;
     private final UserService userService;
+    private final AuthService authService;
 
+    @Transactional
     @GetMapping("/cart")
     public String cart(Model model) {
         model.addAttribute("products", userService.getCart());
         model.addAttribute("totalPrice", userService.getCartTotalPrice());
+        model.addAttribute("authUser", authService.getAuthUserOrNull());
+
         return "cart";
     }
 
     @GetMapping("/order/{id}")
     public String order(Model model, @PathVariable("id") int id) {
         model.addAttribute("order", userService.getOrderById(id));
+        model.addAttribute("authUser", authService.getAuthUserOrNull());
         return "order";
     }
 

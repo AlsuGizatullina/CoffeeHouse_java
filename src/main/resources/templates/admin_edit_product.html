@@ -15,18 +15,19 @@
                         <h3 class="card-title text-center">Изменить продукт</h3>
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form th:method="POST" th:action="@{/admin/products/edit}" th:object="${product}">
+                            <input type="hidden" th:field="*{id}">
                             <div class="mb-3">
-                                <label for="productLink" class="form-label">Ссылка на изображение</label>
-                                <input type="text" class="form-control" id="productLink">
+                                <label for="image" class="form-label">Ссылка на изображение</label>
+                                <input th:field="*{image}" type="text" class="form-control" id="image" name="image">
                             </div>
                             <div class="mb-3">
-                                <label for="productName" class="form-label">Наименование</label>
-                                <input type="text" class="form-control" id="productName">
+                                <label for="name" class="form-label">Наименование</label>
+                                <input th:field="*{name}" type="text" class="form-control" id="name" name="name">
                             </div>
                             <div class="mb-3">
-                                <label for="productPrice" class="form-label">Цена </label>
-                                <input type="number" class="form-control" id="productPrice">
+                                <label for="price" class="form-label">Цена </label>
+                                <input th:field="*{price}" type="number" class="form-control" id="price" name="price">
                             </div>
                             <div class="d-grid gap-2 mt-4">
                                 <button type="submit" class="btn btn-success btn-lg">Сохранить изменения</button>

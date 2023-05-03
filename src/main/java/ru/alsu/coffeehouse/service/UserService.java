@@ -16,7 +16,6 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-@Transactional
 public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
@@ -59,7 +58,7 @@ public class UserService {
     }
 
     public boolean addToCartByProductId(int id) {
-        var user = authService.getAuthUser().orElseThrow();
+        var user = userRepository.findById(authService.getAuthUser().orElseThrow().getId()).orElseThrow();
 
         // Проверяем, есть ли уже товар в корзине
         var product = user.getProducts().stream()
@@ -74,18 +73,16 @@ public class UserService {
         return true;
     }
 
-    @Transactional(readOnly = true)
     public List<Product> getCart() {
-        return authService.getAuthUser().orElseThrow().getProducts();
+        return userRepository.findById(authService.getAuthUser().orElseThrow().getId()).orElseThrow().getProducts();
     }
 
     public void removeFromCartByProductId(int id) {
-        var user = authService.getAuthUser().orElseThrow();
+        var user = userRepository.findById(authService.getAuthUser().orElseThrow().getId()).orElseThrow();
         user.getProducts().removeIf(p -> p.getId() == id);
         save(user);
     }
 
-    @Transactional(readOnly = true)
     public double getCartTotalPrice() {
         return getCart().stream()
                 .mapToDouble(Product::getPrice)
@@ -106,13 +103,20 @@ public class UserService {
         order.setTotal(totalPrice);
         order.setDate(java.time.LocalDateTime.now());
         order.setStatus("В обработке");
+
+        // Удаляем продукты из корзины
         user.getProducts().clear();
+
         save(user);
         orderService.save(order);
         return order;
     }
 
-    @Transactional(readOnly = true)
+    private void deleteFromCartById(User user, int id) {
+        user.getProducts().removeIf(product -> product.getId() == id);
+        save(user);
+    }
+
     public Order getOrderById(int id) {
         var user = authService.getAuthUser().orElseThrow();
         var order = orderService.getById(id);
@@ -126,5 +130,13 @@ public class UserService {
         } else {
             return null;
         }
+    }
+
+    public List<User> getAll() {
+        return userRepository.findAll();
+    }
+
+    public User getById(int id) {
+        return userRepository.findById(id).orElse(null);
     }
 }
