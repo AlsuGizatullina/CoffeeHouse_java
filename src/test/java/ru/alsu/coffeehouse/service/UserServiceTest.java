@@ -1,0 +1,140 @@
+package ru.alsu.coffeehouse.service;
+
+import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.boot.test.context.SpringBootTest;
+import ru.alsu.coffeehouse.domain.dto.UserRegisterDTO;
+import ru.alsu.coffeehouse.domain.model.Product;
+import ru.alsu.coffeehouse.domain.model.User;
+import ru.alsu.coffeehouse.mapper.UserMapper;
+import ru.alsu.coffeehouse.repository.UserRepository;
+
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+@SpringBootTest
+public class UserServiceTest {
+
+    @Mock
+    private UserRepository userRepository;
+
+    @Mock
+    private UserMapper userMapper;
+
+    @Mock
+    private AuthService authService;
+
+    @Mock
+    private ProductService productService;
+
+    @Mock
+    private OrderService orderService;
+
+    @InjectMocks
+    private UserService userService;
+
+    @Test
+    public void testSave() {
+        User user = new User();
+        userService.save(user);
+        verify(userRepository, times(1)).save(user);
+    }
+
+    @Test
+    public void testFindByUsername() {
+        User user = new User();
+        when(userRepository.findByUsername(anyString())).thenReturn(Optional.of(user));
+        Optional<User> result = userService.findByUsername("testUser");
+        assertTrue(result.isPresent());
+        assertEquals(user, result.get());
+    }
+
+    @Test
+    public void testFindById() {
+        User user = new User();
+        when(userRepository.findById(anyInt())).thenReturn(Optional.of(user));
+        Optional<User> result = userService.findById(1);
+        assertTrue(result.isPresent());
+        assertEquals(user, result.get());
+    }
+
+    @Test
+    public void testRegister() {
+        UserRegisterDTO userRegisterDTO = new UserRegisterDTO();
+        User user = new User();
+        when(userMapper.registerDTOToUser(userRegisterDTO)).thenReturn(user);
+        userService.register(userRegisterDTO);
+        verify(userRepository, times(1)).save(user);
+    }
+
+    @Test
+    public void testAddToCartByProductId() {
+        User user = new User();
+        user.setId(1);
+        Product product = new Product();
+        product.setId(1);
+        product.setPrice(100.0);
+        when(authService.getAuthUser()).thenReturn(Optional.of(user));
+        when(productService.getById(anyInt())).thenReturn(product);
+        when(userRepository.findById(anyInt())).thenReturn(Optional.of(user));
+
+        userService.addToCartByProductId(1);
+
+        verify(userRepository, times(1)).save(user);
+        assertEquals(1, user.getProducts().size());
+        assertEquals(product, user.getProducts().get(0));
+    }
+
+    @Test
+    public void testGetCart() {
+        User user = new User();
+        user.setId(1);
+        Product product = new Product();
+        product.setId(1);
+        product.setPrice(100.0);
+        user.getProducts().add(product);
+        when(authService.getAuthUser()).thenReturn(Optional.of(user));
+        when(userRepository.findById(anyInt())).thenReturn(Optional.of(user));
+
+        List<Product> cart = userService.getCart();
+
+        verify(userRepository, times(1)).findById(user.getId());
+        assertEquals(1, cart.size());
+        assertEquals(product, cart.get(0));
+    }
+
+    @Test
+    public void testRemoveFromCartByProductId() {
+        User user = new User();
+        user.setId(1);
+        Product product = new Product();
+        product.setId(1);
+        product.setPrice(100.0);
+        user.getProducts().add(product);
+        when(authService.getAuthUser()).thenReturn(Optional.of(user));
+        when(userRepository.findById(anyInt())).thenReturn(Optional.of(user));
+
+        userService.removeFromCartByProductId(1);
+
+        verify(userRepository, times(1)).save(user);
+        assertEquals(0, user.getProducts().size());
+    }
+
+//    @Test
+//    public void testGetCartTotalPrice() {
+//        User user = new User();
+//        user.setId(1);
+//        Product product1 = new Product();
+//        product1.setId(1);
+//        product1.setPrice(100.0);
+//        Product product2 = new Product();
+//        product2.setId(2);
+//        product2.setPrice(200.0);
+//    }
+}
