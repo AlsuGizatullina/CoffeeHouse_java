@@ -26,26 +26,15 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="text-light">
+                        <tr th:each="order: ${orders}" class="text-light">
                             <td>
-                                <h2 class="h5">1</h2>
+                                <h2 th:text="${order.getId()}" class="h5">1</h2>
                             </td>
                             <td>
-                                <h2 class="h5">Tom</h2>
+                                <h2 th:text="${order.getUser().getUsername()}" class="h5">Tom</h2>
                             </td>
-                            <td><a href="#" class="btn btn-secondary">Перейти к заказу</a></td>
-                            <td><a href="#" class="btn btn-danger btn-lg">X</a></td>
-                        </tr>
-
-                        <tr class="text-light">
-                            <td>
-                                <h2 class="h5">2</h2>
-                            </td>
-                            <td>
-                                <h2 class="h5">Mike</h2>
-                            </td>
-                            <td><a href="#" class="btn btn-secondary">Перейти к заказу</a></td>
-                            <td><a href="#" class="btn btn-danger btn-lg">X</a></td>
+                            <td><a th:href="@{/admin/orders/{id}(id=${order.getId()})}" class="btn btn-secondary">Перейти к заказу</a></td>
+                            <td><form th:method="POST" th:action="@{/admin/orders/{id}/delete(id=${order.getId()})}"><button class="btn btn-danger btn-lg">X</button></form></td>
                         </tr>
                         </tbody>
                     </table>

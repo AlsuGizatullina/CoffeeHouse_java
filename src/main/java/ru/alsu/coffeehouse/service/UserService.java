@@ -1,8 +1,9 @@
 package ru.alsu.coffeehouse.service;
 
-import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestMapping;
 import ru.alsu.coffeehouse.domain.dto.UserRegisterDTO;
 import ru.alsu.coffeehouse.domain.model.Order;
 import ru.alsu.coffeehouse.domain.model.Product;
@@ -64,17 +65,16 @@ public class UserService {
         var product = user.getProducts().stream()
                 .filter(p -> p.getId() == id)
                 .findFirst();
-        if (product.isPresent()) {
-            return true;
-        } else {
+        if (product.isEmpty()) {
             // Если нет, то добавляем
             var productToAdd = productService.getById(id);
             user.getProducts().add(productToAdd);
             save(user);
-            return true;
         }
+        return true;
     }
 
+    @Transactional(readOnly = true)
     public List<Product> getCart() {
         return authService.getAuthUser().orElseThrow().getProducts();
     }
@@ -85,6 +85,7 @@ public class UserService {
         save(user);
     }
 
+    @Transactional(readOnly = true)
     public double getCartTotalPrice() {
         return getCart().stream()
                 .mapToDouble(Product::getPrice)
@@ -93,7 +94,6 @@ public class UserService {
 
     @Transactional
     public Order order() {
-
         var user = userRepository.findById(authService.getAuthUser().orElseThrow().getId()).orElseThrow();
         var order = new Order();
         double totalPrice = 0;
@@ -102,8 +102,8 @@ public class UserService {
             totalPrice += pr.getPrice();
             order.getProducts().add(pr);
         }
-        order.setTotal(totalPrice);
         order.setUser(user);
+        order.setTotal(totalPrice);
         order.setDate(java.time.LocalDateTime.now());
         order.setStatus("В обработке");
         user.getProducts().clear();
@@ -112,9 +112,14 @@ public class UserService {
         return order;
     }
 
+    @Transactional(readOnly = true)
     public Order getOrderById(int id) {
         var user = authService.getAuthUser().orElseThrow();
         var order = orderService.getById(id);
+
+        if (order == null) {
+            return null;
+        }
 
         if (order.getUser().getId() == user.getId()) {
             return order;

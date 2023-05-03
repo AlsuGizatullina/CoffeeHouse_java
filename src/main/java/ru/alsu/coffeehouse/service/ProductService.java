@@ -1,6 +1,6 @@
 package ru.alsu.coffeehouse.service;
 
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.alsu.coffeehouse.domain.model.Product;

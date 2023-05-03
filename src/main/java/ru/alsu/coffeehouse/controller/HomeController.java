@@ -2,6 +2,7 @@ package ru.alsu.coffeehouse.controller;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import ru.alsu.coffeehouse.service.AuthService;
@@ -9,6 +10,7 @@ import ru.alsu.coffeehouse.service.ProductService;
 
 @Controller
 @AllArgsConstructor
+@Transactional
 public class HomeController {
     private final ProductService productService;
     private final AuthService authService;

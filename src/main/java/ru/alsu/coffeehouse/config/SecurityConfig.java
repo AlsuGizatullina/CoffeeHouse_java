@@ -19,11 +19,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests()
-//                .requestMatchers("/admin/**").hasRole("ADMIN")
-                .requestMatchers("/admin/**").permitAll()
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+//                .requestMatchers("/admin/**").permitAll()
                 .requestMatchers("/home", "/products/*", "/style/**", "/").permitAll()
-                .requestMatchers("/login", "/register").permitAll()
-                .requestMatchers("/cart", "/order", "/order/*").permitAll()
+                .requestMatchers("/login", "/register").anonymous()
+                .requestMatchers("/cart", "/order", "/order/*").authenticated()
 //                 TODO: Добавить ограничение на доступ к странице оформления заказа и на админку
                 .anyRequest().authenticated()
                 .and()
