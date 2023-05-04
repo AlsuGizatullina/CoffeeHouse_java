@@ -20,11 +20,9 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests()
                 .requestMatchers("/admin/**").hasRole("ADMIN")
-//                .requestMatchers("/admin/**").permitAll()
-                .requestMatchers("/home", "/products/*", "/style/**", "/").permitAll()
+                .requestMatchers("/home", "/products/*", "/").permitAll()
                 .requestMatchers("/login", "/register").anonymous()
                 .requestMatchers("/cart", "/order", "/order/*").authenticated()
-//                 TODO: Добавить ограничение на доступ к странице оформления заказа и на админку
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login")
@@ -49,5 +47,4 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }

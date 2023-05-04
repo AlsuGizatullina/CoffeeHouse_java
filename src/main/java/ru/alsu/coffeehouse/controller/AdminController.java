@@ -68,4 +68,16 @@ public class AdminController {
         return "redirect:/admin/products";
     }
 
+    @GetMapping("/products/add")
+    public String addProduct(Model model) {
+        model.addAttribute("product", new Product());
+        return "admin_create_product";
+    }
+
+    @PostMapping("/products/add")
+    public String addProductPost(Product product) {
+        productService.save(product);
+        return "redirect:/admin/products";
+    }
+
 }

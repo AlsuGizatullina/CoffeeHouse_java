@@ -14,6 +14,7 @@
     <div class="container mt-5 text-light bg-black p-5 rounded-5 mb-5">
         <h1 class="mb-4">Продукты</h1>
         <div class="row mb-5">
+            <a class="btn btn-outline-light mb-4" href="/admin/products/add">Добавить продукт</a>
             <form class="col-md-12" method="post">
                 <div class="site-blocks-table">
                     <table class="table table-bordered text-light">
@@ -21,7 +22,8 @@
                         <tr>
                             <th>Id продукта</th>
                             <th class="product-thumbnail">Изображение</th>
-                            <th class="product-name">Название</th>
+                            <th class="product-name">Наименование</th>
+                            <th class="product-name">Описание</th>
                             <th class="product-price">Цена</th>
                             <th>Редактирование</th>
                         </tr>
@@ -35,6 +37,7 @@
                             <td class="product-name">
                                 <h2 th:text="${product.getName()}" class="h5"></h2>
                             </td>
+                            <td th:text="${product.getDescription()}" class="h6"></td>
                             <td th:text="${product.getPrice()}"></td>
                             <td><a th:href="@{/admin/products/{id}/edit(id=${product.getId()})}" class="btn btn-secondary ">Редактировать</a></td>
                         </tr>
