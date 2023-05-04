@@ -15,7 +15,6 @@ import java.util.Optional;
 public class ProductService {
     private final ProductRepository productRepository;
 
-
     /**
      * Получение всех продуктов
      * @return
@@ -51,10 +50,5 @@ public class ProductService {
     @Transactional
     public void save(Product product) {
         productRepository.save(product);
-    }
-
-    @Transactional
-    public void deleteFromCartById(User user, int id) {
-
     }
 }

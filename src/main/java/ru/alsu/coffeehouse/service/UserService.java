@@ -112,11 +112,6 @@ public class UserService {
         return order;
     }
 
-    private void deleteFromCartById(User user, int id) {
-        user.getProducts().removeIf(product -> product.getId() == id);
-        save(user);
-    }
-
     public Order getOrderById(int id) {
         var user = authService.getAuthUser().orElseThrow();
         var order = orderService.getById(id);
@@ -136,7 +131,4 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User getById(int id) {
-        return userRepository.findById(id).orElse(null);
-    }
 }

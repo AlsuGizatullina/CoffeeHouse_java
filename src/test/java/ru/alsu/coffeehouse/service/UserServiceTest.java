@@ -125,16 +125,4 @@ public class UserServiceTest {
         verify(userRepository, times(1)).save(user);
         assertEquals(0, user.getProducts().size());
     }
-
-//    @Test
-//    public void testGetCartTotalPrice() {
-//        User user = new User();
-//        user.setId(1);
-//        Product product1 = new Product();
-//        product1.setId(1);
-//        product1.setPrice(100.0);
-//        Product product2 = new Product();
-//        product2.setId(2);
-//        product2.setPrice(200.0);
-//    }
 }
