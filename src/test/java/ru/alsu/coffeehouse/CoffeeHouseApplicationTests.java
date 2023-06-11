@@ -8,6 +8,7 @@ class CoffeeHouseApplicationTests {
 
     @Test
     void contextLoads() {
+        //Проверка, что приложение поднимается
     }
 
 }

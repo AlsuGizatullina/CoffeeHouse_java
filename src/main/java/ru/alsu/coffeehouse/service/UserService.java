@@ -3,7 +3,6 @@ package ru.alsu.coffeehouse.service;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestMapping;
 import ru.alsu.coffeehouse.domain.dto.UserRegisterDTO;
 import ru.alsu.coffeehouse.domain.model.Order;
 import ru.alsu.coffeehouse.domain.model.Product;

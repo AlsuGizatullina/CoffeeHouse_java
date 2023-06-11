@@ -7,13 +7,10 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.alsu.coffeehouse.domain.model.Product;
 import ru.alsu.coffeehouse.repository.ProductRepository;
-import ru.alsu.coffeehouse.service.ProductService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest

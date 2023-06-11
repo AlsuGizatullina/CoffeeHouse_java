@@ -4,7 +4,6 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.alsu.coffeehouse.domain.model.Product;
-import ru.alsu.coffeehouse.domain.model.User;
 import ru.alsu.coffeehouse.repository.ProductRepository;
 
 import java.util.List;

@@ -52,8 +52,4 @@ public class SecurityUser implements UserDetails {
     public User getUser() {
         return user;
     }
-
-    public void updateUser(User user) {
-        this.user = user;
-    }
 }

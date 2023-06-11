@@ -1,10 +1,8 @@
 package ru.alsu.coffeehouse.service;
 
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.alsu.coffeehouse.domain.dto.UserRegisterDTO;
 import ru.alsu.coffeehouse.domain.model.Product;
@@ -32,9 +30,6 @@ public class UserServiceTest {
 
     @Mock
     private ProductService productService;
-
-    @Mock
-    private OrderService orderService;
 
     @InjectMocks
     private UserService userService;
